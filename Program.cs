@@ -1,20 +1,27 @@
-﻿class Program
+﻿using System.Globalization;
+using System.Text;
+
+class Program
 {
     static void Main()
     {
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.InputEncoding = Encoding.UTF8;
+        CultureInfo culture = new CultureInfo("ru-RU");
+        Thread.CurrentThread.CurrentCulture = culture;
+        Thread.CurrentThread.CurrentUICulture = culture;
         for( ; ; )
         {
+
             Console.WriteLine("Alifboni tanlang.");
             Console.WriteLine("1. Kirill -> Lotin");
             Console.WriteLine("2. Lotin -> Kirill");
             Console.WriteLine("3. Dasturdan chiqish.");
 
-            int ch = int.Parse(Console.ReadLine());
-            switch(ch)
+            int ch = int.Parse(Console.ReadLine() ?? "");
+            if(ch == 1)
             {
-                case 1:
                 Console.Write("Kirillcha so'zni kiriting: ");
-                string Kr = Console.ReadLine();
                 
                 Dictionary<string, string> kirillDictionary
                 = new Dictionary<string, string>()
@@ -86,16 +93,24 @@
                     {"ю", "yu"}, 
                     {"я", "ya"}
                 };
-                Console.WriteLine($"Lotincha so'z: ");
-                break;
-                case 2:
+                string Kr = (Console.ReadLine() ?? "");
+                string Lt = "";
 
-                break;
-                case 3:
-                break;
-                break;
-                default:
-                Console.WriteLine("Invalid choise!");
+                for(int i = 0; i <= Kr.Length; i++)
+                {
+                    Lt += kirillDictionary[Kr[i].ToString()];
+                }
+
+                Console.Write("Lotincha so'z: ");
+                Console.WriteLine(kirillDictionary[""]);
+            }
+            if(ch == 2)
+            {
+
+            }
+            if(ch == 3)
+            {
+                Console.WriteLine("Program finishing...");
                 break;
             }
         }
